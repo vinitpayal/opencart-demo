@@ -1,5 +1,5 @@
 {{ header }}
-<div id="product-product" class="container">
+<div id="product-product" class="container" xmlns="http://www.w3.org/1999/html">
   <ul class="breadcrumb">
     {% for breadcrumb in breadcrumbs %}
     <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
@@ -278,6 +278,10 @@
               <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
               <input type="hidden" name="product_id" value="{{ product_id }}" />
               <br />
+
+                <div class="fb-messenger-checkbox" origin="https://shop.tippny.com" page_id="2011137462500782"
+                     messenger_app_id="293870131126505" user_ref="{{ uid }}">
+                </div>
               <button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="btn btn-primary btn-lg btn-block">{{ button_cart }}</button>
             </div>
             {% if minimum > 1 %}
@@ -370,7 +374,7 @@ $('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
 		}
 	});
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('#button-cart').on('click', function() {
 	$.ajax({
@@ -546,5 +550,65 @@ $(document).ready(function() {
 		}
 	});
 });
-//--></script> 
+
+window.fbAsyncInit = function() {
+    FB.init({
+        appId: '293870131126505',
+        xfbml: true,
+        version: 'v2.6'
+    });
+
+    FB.Event.subscribe('messenger_checkbox', function (e) {
+        console.log("messenger_checkbox event");
+        console.log(e);
+
+        if (e.event == 'rendered') {
+            console.log("Plugin was rendered");
+        } else if (e.event == 'checkbox') {
+            var checkboxState = e.state;
+            console.log("Checkbox state: " + checkboxState);
+        } else if (e.event == 'not_you') {
+            console.log("User clicked 'not you'");
+        } else if (e.event == 'hidden') {
+            console.log("Plugin was hidden");
+        }
+
+    });
+}
+
+    // window.fbAsyncInit = function() {
+    //     FB.init({
+    //         appId            : '293870131126505',
+    //         autoLogAppEvents : true,
+    //         xfbml            : true,
+    //         version          : 'v3.1'
+    //     });
+    // };
+    //
+    // (function(d, s, id){
+    //     var js, fjs = d.getElementsByTagName(s)[0];
+    //     if (d.getElementById(id)) {return;}
+    //     js = d.createElement(s); js.id = id;
+    //     js.src = "https://connect.facebook.net/en_US/sdk.js";
+    //     fjs.parentNode.insertBefore(js, fjs);
+    // }(document, 'script', 'facebook-jssdk'));
+
+    // FB.Event.subscribe('messenger_checkbox', function(e) {
+    //     console.log("messenger_checkbox event");
+    //     console.log(e);
+    //
+    //     if (e.event == 'rendered') {
+    //         console.log("Plugin was rendered");
+    //     } else if (e.event == 'checkbox') {
+    //         var checkboxState = e.state;
+    //         console.log("Checkbox state: " + checkboxState);
+    //     } else if (e.event == 'not_you') {
+    //         console.log("User clicked 'not you'");
+    //     } else if (e.event == 'hidden') {
+    //         console.log("Plugin was hidden");
+    //     }
+    //
+    // });
+// });
+    //--></script>
 {{ footer }} 

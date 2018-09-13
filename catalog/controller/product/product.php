@@ -3,9 +3,12 @@ class ControllerProductProduct extends Controller {
 	private $error = array();
 
 	public function index() {
+
 		$this->load->language('product/product');
 
 		$data['breadcrumbs'] = array();
+
+		$data['uid'] = md5(microtime(true).mt_Rand());
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
