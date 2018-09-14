@@ -357,40 +357,46 @@
 </div>
 
 <script type="text/javascript">
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId: '293870131126505',
-            autoLogAppEvents : true,
-            xfbml            : true,
-            version          : 'v3.1'
+    $(document).ready(function() {
+        $.ajaxSetup({ cache: true });
+        console.log('---1------');
+        $.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
+            console.log('---2------');
+            FB.init({
+                appId: '293870131126505',
+                autoLogAppEvents : true,
+                xfbml            : true,
+                version          : 'v3.1'
+            });
+            console.log('---3------');
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                console.log(js, fjs);
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            console.log('---4------');
+            FB.Event.subscribe('messenger_checkbox', function (e) {
+                console.log("messenger_checkbox event");
+                console.log(e);
+
+                if (e.event == 'rendered') {
+                    console.log("Plugin was rendered");
+                } else if (e.event == 'checkbox') {
+                    var checkboxState = e.state;
+                    console.log("Checkbox state: " + checkboxState);
+                } else if (e.event == 'not_you') {
+                    console.log("User clicked 'not you'");
+                } else if (e.event == 'hidden') {
+                    console.log("Plugin was hidden");
+                }
+
+            });
+
         });
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            console.log(js, fjs);
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-        FB.Event.subscribe('messenger_checkbox', function (e) {
-            console.log("messenger_checkbox event");
-            console.log(e);
-
-            if (e.event == 'rendered') {
-                console.log("Plugin was rendered");
-            } else if (e.event == 'checkbox') {
-                var checkboxState = e.state;
-                console.log("Checkbox state: " + checkboxState);
-            } else if (e.event == 'not_you') {
-                console.log("User clicked 'not you'");
-            } else if (e.event == 'hidden') {
-                console.log("Plugin was hidden");
-            }
-
-        });
-    }
+    });
 </script>
 
 <script type="text/javascript"><!--
