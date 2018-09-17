@@ -418,7 +418,7 @@ $('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
 <script type="text/javascript"><!--
 $('#button-cart').on('click', function() {
     var user_ref = "{{ uid }}";
-    var ref = {"product_id": {{ product_id}} };
+    var ref = {"product_id": {{ product_id}}, "product_url": window.location.href};
 
     console.log("logging message checkbox user confirmation event");
     FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
