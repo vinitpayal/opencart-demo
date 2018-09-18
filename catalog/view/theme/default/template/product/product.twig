@@ -357,6 +357,22 @@
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function(){
+        let addToCart = location.search.split("add_to_cart")[1];
+
+        if(addToCart) {
+            addToCart = addToCart.replace("=", '');
+
+            if (addToCart == "yes") {
+                $('#button-cart').trigger("click");
+                window.location.assign('/index.php?route=checkout/cart')
+            }
+        }
+    })
+</script>
+
+
+<script type="text/javascript">
     $(document).ready(function() {
         $.ajaxSetup({ cache: true });
         $.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
@@ -390,7 +406,6 @@
                 }
 
             });
-
         });
     });
 </script>
@@ -421,12 +436,15 @@ $('#button-cart').on('click', function() {
     var ref = {"product_id": {{ product_id}}, "product_url": window.location.href};
 
     console.log("logging message checkbox user confirmation event");
-    FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
-        'app_id':'293870131126505',
-        'page_id':'2011137462500782',
-        "ref": ref,
-        'user_ref': user_ref
-    });
+
+    if(typeof FB != 'undefined') {
+        FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
+            'app_id': '293870131126505',
+            'page_id': '2011137462500782',
+            "ref": ref,
+            'user_ref': user_ref
+        });
+    }
 
 	$.ajax({
 		url: 'index.php?route=checkout/cart/add',
