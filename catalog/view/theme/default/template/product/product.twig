@@ -433,7 +433,12 @@ $('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
 <script type="text/javascript"><!--
 $('#button-cart').on('click', function() {
     var user_ref = "{{ uid }}";
-    var ref = {"product_id": {{ product_id}}, "product_url": window.location.href};
+    var ref = {
+        "product_id": {{ product_id}},
+        "product_url": window.location.href,
+        "product_image": "{{ images[0]['thumb'] }}",
+        "product_add_to_cart_url": window.location.href+"&add_to_cart=yes"
+    };
 
     if(typeof FB != 'undefined') {
         FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
