@@ -436,7 +436,7 @@ $('#button-cart').on('click', function() {
     var ref = {
         "product_id": {{ product_id}},
         "product_url": window.location.href,
-        "product_image": "{{ images[0]['thumb'] }}",
+        "product_image": "{{ images[0]['popup'] }}",
         "product_add_to_cart_url": window.location.href+"&add_to_cart=yes",
         "user_ref": user_ref,
         "access_token": "YrET5zvlHX9dOSWlPQ2aKk6sVjryI9uO"
