@@ -407,7 +407,7 @@ $('#button-cart').on('click', function() {
     };
 
     // first be sure to include tippny-checkbox js
-    tippnySendCheckboxSelectionEventAfterClick();
+    tippnySendCheckboxSelectionEventAfterClick(user_ref, ref);
 
 	$.ajax({
 		url: 'index.php?route=checkout/cart/add',
