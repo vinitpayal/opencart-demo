@@ -372,43 +372,7 @@
 </script>
 
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $.ajaxSetup({ cache: true });
-        $.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
-            FB.init({
-                appId: '293870131126505',
-                autoLogAppEvents : true,
-                xfbml            : true,
-                version          : 'v3.1'
-            });
-            (function(d, s, id){
-                var js, fjs = d.getElementsByTagName(s)[0];
-                console.log(js, fjs);
-                if (d.getElementById(id)) {return;}
-                js = d.createElement(s); js.id = id;
-                js.src = "https://connect.facebook.net/en_US/sdk.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-            FB.Event.subscribe('messenger_checkbox', function (e) {
-                // console.log("messenger_checkbox event");
-                // console.log(e);
-
-                if (e.event == 'rendered') {
-                    console.log("Plugin was rendered");
-                } else if (e.event == 'checkbox') {
-                    var checkboxState = e.state;
-                    console.log("Checkbox state: " + checkboxState);
-                } else if (e.event == 'not_you') {
-                    console.log("User clicked 'not you'");
-                } else if (e.event == 'hidden') {
-                    console.log("Plugin was hidden");
-                }
-
-            });
-        });
-    });
-</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/vinitpayal/tippny-fb-webhook-handler@1/storage/static/tippny-checkbox.min.js"></script>
 
 <script type="text/javascript"><!--
 $('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
@@ -442,14 +406,8 @@ $('#button-cart').on('click', function() {
         "access_token": "YrET5zvlHX9dOSWlPQ2aKk6sVjryI9uO"
     };
 
-    if(typeof FB != 'undefined') {
-        FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
-            'app_id': '293870131126505',
-            'page_id': '2011137462500782',
-            "ref": JSON.stringify(ref),
-            'user_ref': user_ref
-        });
-    }
+    // first be sure to include tippny-checkbox js
+    tippnySendCheckboxSelectionEventAfterClick();
 
 	$.ajax({
 		url: 'index.php?route=checkout/cart/add',
