@@ -23,7 +23,9 @@
 <link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" />
 <link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">
-{% for style in styles %}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/vinitpayal/tippny-fb-webhook-handler@1.3/storage/static/tippny-checkbox.min.js"></script>
+
+    {% for style in styles %}
 <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
 {% endfor %}
 {% for script in scripts %}
@@ -79,6 +81,5 @@
   </div>
 </header>
 
-{% include 'default/template/common/tippny_subscribe.twig' %}
-
 {{ menu }}
+
